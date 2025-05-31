@@ -29,6 +29,6 @@ build:
 run:
   stage: run
   script:
-    - docker stop api
-    - docker rm api
-    - docker run --name api --env-file .env -p 5000:5000 ecom_demo:v1
+    - docker stop api || true
+    - docker rm api || true
+    - docker run --name api --env-file /home/admin/ecom_demo/.env -p 5000:5000 ecom_demo:v1

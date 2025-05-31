@@ -1,0 +1,4 @@
+# Lancer les commande suivante pour tester le pipeline dans la sandbox
+sudo gitlab-runner exec docker test 
+sudo gitlab-runner exec shell build
+sudo gitlab-runner exec shell run
