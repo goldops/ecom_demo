@@ -28,7 +28,6 @@ ENV PATH=/root/.local/bin:$PATH
 WORKDIR /app
 
 # Copier les fichiers du projet
-COPY .env .env
 COPY . .
 
 # Exposer le port 5000
