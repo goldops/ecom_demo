@@ -1,0 +1,83 @@
+#Postman alternative - Curl commands from terminal
+
+#Créér un admin
+curl -X POST http://localhost:5000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "admin@gmail.com",
+    "mot_de_passe": "admin123",
+    "nom": "Admin User",
+    "role": "admin"
+}'
+
+
+
+#Créér un user
+curl -X POST http://localhost:5000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "client@gmail.com",
+    "mot_de_passe": "client123",
+    "nom": "Client Pilote"
+}'
+
+
+#Authentification admin : KO
+curl -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "admin@example.com",
+    "mot_de_passe": "admin123"
+}'
+
+
+#Authentification admin : OK
+curl -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "admin@gmail.com",
+    "mot_de_passe": "admin123"
+}'
+
+#Création d'un produit
+curl -X POST http://localhost:5000/api/produits \
+  -H "Authorization: Bearer eyH4pw" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nom": "Laptop XPS 15",
+    "description": "Dell XPS 15 doté d'\''un écran InfinityEdge 16:10 sur 4 côtés et de 100 % des couleurs Adobe RGB",
+    "prix": 1499.99,
+    "categorie": "PC Portable",
+    "quantite_stock": 10
+}'
+
+#Edition d'un produit
+curl -X PUT http://localhost:5000/api/produits/1 \
+  -H "Authorization: Bearer eyH4pw" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "prix": 1399.99,
+    "quantite_stock": 15
+}'
+
+#Création d'une commande
+curl -X POST http://localhost:5000/api/commandes \
+  -H "Authorization: Bearer eyH4pw" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "adresse_livraison": "13 Rue du 4 Septembre, Paris",
+    "items": [
+        {
+            "produit_id": 1,
+            "quantite": 2
+        }
+    ]
+}'
+
+#Edition du 'statut' d'une commande
+curl -X PATCH http://localhost:5000/api/commandes/1 \
+  -H "Authorization: Bearer eyH4pw" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "statut": "validée"
+}'
